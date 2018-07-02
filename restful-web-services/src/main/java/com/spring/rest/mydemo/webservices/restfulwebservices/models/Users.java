@@ -39,6 +39,9 @@ public class Users {
 		return "Users [id=" + id + ", name=" + name + ", dob=" + dob + "]";
 	}
 
+	protected Users() {
+		
+	}
 	public Users(Integer id, String name, Date dob) {
 		this.id = id;
 		this.name = name;

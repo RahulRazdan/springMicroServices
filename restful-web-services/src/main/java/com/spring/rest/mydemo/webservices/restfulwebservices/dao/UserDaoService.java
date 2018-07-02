@@ -12,7 +12,7 @@ import com.spring.rest.mydemo.webservices.restfulwebservices.models.Users;
 public class UserDaoService {
 
 	private static List<Users> users = new ArrayList<>();
-	private static int count;
+	private static int count=3;
 	
 	static {
 		users.add(new Users(1,"Rahul",new Date()));
@@ -24,11 +24,12 @@ public class UserDaoService {
 		return users;
 	}
 	
-	public void addUser(Users user) {
+	public Users addUser(Users user) {
 		if(user.getId() == 0)
 			user.setId(++count);
 		
 		users.add(user);
+		return user;
 	}
 	
 	public Users findOne(int id) {
