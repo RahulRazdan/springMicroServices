@@ -2,12 +2,17 @@ package com.spring.rest.mydemo.webservices.restfulwebservices.models;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class Users {
 
 	private int id;
 	
+	@Size(min=2,message="Name should be of at least length 2")
 	private String name;
 	
+	@Past
 	private Date dob;
 
 	public int getId() {

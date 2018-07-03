@@ -2,8 +2,10 @@ package com.spring.rest.mydemo.webservices.restfulwebservices.model;
 
 import java.util.Date;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
@@ -24,5 +26,13 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 	public final ResponseEntity<Object> getAllExceptions(Exception e , WebRequest request){
 		ExceptionResponse response = new ExceptionResponse(e.getMessage(),new Date(),e.getStackTrace().toString());
 		return new ResponseEntity<Object>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(
+			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		ExceptionResponse response = new ExceptionResponse("Validation failed!!",new Date(),ex.getBindingResult().toString());
+		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
 	}
 }
