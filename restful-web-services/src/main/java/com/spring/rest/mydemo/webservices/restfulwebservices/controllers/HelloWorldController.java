@@ -25,6 +25,7 @@ import com.spring.rest.mydemo.webservices.restfulwebservices.dao.UserDaoService;
 import com.spring.rest.mydemo.webservices.restfulwebservices.model.UserNotFoundException;
 import com.spring.rest.mydemo.webservices.restfulwebservices.models.HelloWorldBean;
 import com.spring.rest.mydemo.webservices.restfulwebservices.models.Users;
+import com.spring.rest.mydemo.webservices.restfulwebservices.models.UsersV2;
 
 @RestController
 public class HelloWorldController {
@@ -50,9 +51,14 @@ public class HelloWorldController {
 		return new HelloWorldBean(String.format("Hello World ,%s", name));
 	}
 	
-	@GetMapping(path="/users")
+	@GetMapping(path="/users",produces="application/vnd.fico.app-V1+json")
 	public List<Users> findAllUsers(){
 		return userService.findAll();
+	}
+	
+	@GetMapping(path="/users",produces="application/vnd.fico.app-V2+json")
+	public List<UsersV2> findAllUsersV2(){
+		return userService.findAllV2();
 	}
 	
 	@GetMapping(path="/users/{id}")

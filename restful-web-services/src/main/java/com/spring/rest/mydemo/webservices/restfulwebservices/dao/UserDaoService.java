@@ -8,17 +8,23 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.spring.rest.mydemo.webservices.restfulwebservices.models.Users;
+import com.spring.rest.mydemo.webservices.restfulwebservices.models.UsersV2;
 
 @Component
 public class UserDaoService {
 
 	private static List<Users> users = new ArrayList<>();
+	private static List<UsersV2> usersV2 = new ArrayList<>();
 	private static int count=3;
 	
 	static {
 		users.add(new Users(1,"Rahul",new Date()));
 		users.add(new Users(2,"Razdan",new Date()));
 		users.add(new Users(3,"Vipul",new Date()));
+		
+		usersV2.add(new UsersV2(1,"Rahul",new Date(),"Engg"));
+		usersV2.add(new UsersV2(2,"Razdan",new Date(),"Doctor"));
+		usersV2.add(new UsersV2(3,"Vipul",new Date(),"CA"));
 	}
 	
 	public List<Users> findAll() {
@@ -53,5 +59,9 @@ public class UserDaoService {
 			}
 		}
 		return null;
+	}
+
+	public List<UsersV2> findAllV2() {
+		return usersV2;
 	}
 }
