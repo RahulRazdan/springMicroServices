@@ -1,10 +1,12 @@
 package com.spring.rest.mydemo.webservices.restfulwebservices.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -27,6 +29,9 @@ public class Users {
 	@ApiModelProperty(notes="DOB should be in past")
 	private Date dob;
 
+	@OneToMany(mappedBy="user")
+	private List<Posts> post;
+	
 	public int getId() {
 		return id;
 	}
@@ -54,6 +59,14 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", name=" + name + ", dob=" + dob + "]";
+	}
+
+	public List<Posts> getPost() {
+		return post;
+	}
+
+	public void setPost(List<Posts> post) {
+		this.post = post;
 	}
 
 	protected Users() {
